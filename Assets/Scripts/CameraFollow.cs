@@ -5,11 +5,16 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
 
-    [SerializeField] private Transform playerTransform;
+    private Transform playerTransform;
+    [SerializeField] private string followThisTag = "Player";
+
+    private void Start()
+    {
+        playerTransform = GameObject.FindGameObjectWithTag(followThisTag).transform;
+    }
 
 
-
-    private void Update()
+    private void LateUpdate()
     {
         transform.position = playerTransform.position;
     }
