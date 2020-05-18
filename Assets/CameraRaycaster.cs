@@ -22,30 +22,27 @@ public class CameraRaycaster : MonoBehaviour
         get { return _layerHit; }
     }
 
-    void Start() // TODO Awake?
+    private void Awake()
     {
         viewCamera = Camera.main;
     }
 
     void Update()
     {
-        // Look for and return priority layer hit
         foreach (Layer layer in layerPriorities)
         {
             var hit = RaycastForLayer(layer);
+
             if (hit.HasValue)
             {
                 _hit = hit.Value;
-                _layerHit = layer;
-                Debug.Log(_hit);
-                Debug.Log(_layerHit);
+                _layerHit = layer;           
                 return;
             }
         }
-
-        // Otherwise return background hit
         _hit.distance = distanceToBackground;
         _layerHit = Layer.RaycastEndStop;
+
     }
 
     RaycastHit? RaycastForLayer(Layer layer)
