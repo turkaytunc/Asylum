@@ -703,9 +703,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8752507356188409897, guid: 1d1a7bd29d1a5434ea69a7f994fceadb, type: 3}
+      propertyPath: m_TagString
+      value: MainCamera
+      objectReference: {fileID: 0}
     - target: {fileID: 8752507356539677171, guid: 1d1a7bd29d1a5434ea69a7f994fceadb, type: 3}
       propertyPath: m_Name
       value: CameraContainer
+      objectReference: {fileID: 0}
+    - target: {fileID: 8752507356539677171, guid: 1d1a7bd29d1a5434ea69a7f994fceadb, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 8752507356539677172, guid: 1d1a7bd29d1a5434ea69a7f994fceadb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -764,6 +772,10 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 13400000, guid: c2815a7ab32e42c4bb42f59caacb8ec1, type: 2}
+    - target: {fileID: 8855265372176515706, guid: 4464e78ff2851d94fa6ded89bd0e319a, type: 3}
+      propertyPath: m_GroundCheckDistance
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 8855265372183152952, guid: 4464e78ff2851d94fa6ded89bd0e319a, type: 3}
       propertyPath: m_Name
       value: Player
