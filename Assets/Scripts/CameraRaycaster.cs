@@ -9,6 +9,10 @@ public class CameraRaycaster : MonoBehaviour
 
     [SerializeField] float distanceToBackground = 100f;
     Camera viewCamera;
+    private void Awake()
+    {
+        viewCamera = Camera.main;
+    }
 
     private RaycastHit _hit;
     private Layer _layerHit;
@@ -22,20 +26,16 @@ public class CameraRaycaster : MonoBehaviour
         get { return _layerHit; }
     }
 
-    private void Awake()
-    {
-        viewCamera = Camera.main;
-    }
 
     void Update()
     {
         foreach (Layer layer in layerPriorities)
         {
-            var hit = RaycastForLayer(layer);
+            var hitInfo = RaycastForLayer(layer);
 
-            if (hit.HasValue)
+            if (hitInfo.HasValue)
             {
-                _hit = hit.Value;
+                _hit = hitInfo.Value;
                 _layerHit = layer;           
                 return;
             }
@@ -47,14 +47,14 @@ public class CameraRaycaster : MonoBehaviour
 
     RaycastHit? RaycastForLayer(Layer layer)
     {
-        int layerMask = 1 << (int)layer; // See Unity docs for mask formation
         Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
+        int layerMask = 1 << (int)layer; // See Unity docs for mask formation
+        RaycastHit hitInfo; // used as an out parameter
 
-        RaycastHit hit; // used as an out parameter
-        bool hasHit = Physics.Raycast(ray, out hit, distanceToBackground, layerMask);
+        bool hasHit = Physics.Raycast(ray, out hitInfo, distanceToBackground, layerMask);
         if (hasHit)
         {
-            return hit;
+            return hitInfo;
         }
         return null;
     }

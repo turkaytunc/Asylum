@@ -11,8 +11,5 @@ public class MouseCursor : MonoBehaviour
     {
         cameraRaycaster = GetComponent<CameraRaycaster>();
     }
-    void Update()
-    {
-       Debug.Log(cameraRaycaster.LayerHit);
-    }
+
 }
