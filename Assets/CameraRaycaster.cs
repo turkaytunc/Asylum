@@ -7,19 +7,19 @@ public class CameraRaycaster : MonoBehaviour
         Layer.Walkable
     };
 
-    float distanceToBackground = 100f;
+    [SerializeField] float distanceToBackground = 100f;
     Camera viewCamera;
 
-    RaycastHit m_hit;
-    public RaycastHit hit
+    private RaycastHit _hit;
+    private Layer _layerHit;
+    public RaycastHit Hit
     {
-        get { return m_hit; }
+        get { return _hit; }
     }
 
-    Layer m_layerHit;
-    public Layer layerHit
+    public Layer LayerHit
     {
-        get { return m_layerHit; }
+        get { return _layerHit; }
     }
 
     void Start() // TODO Awake?
@@ -35,15 +35,17 @@ public class CameraRaycaster : MonoBehaviour
             var hit = RaycastForLayer(layer);
             if (hit.HasValue)
             {
-                m_hit = hit.Value;
-                m_layerHit = layer;
+                _hit = hit.Value;
+                _layerHit = layer;
+                Debug.Log(_hit);
+                Debug.Log(_layerHit);
                 return;
             }
         }
 
         // Otherwise return background hit
-        m_hit.distance = distanceToBackground;
-        m_layerHit = Layer.RaycastEndStop;
+        _hit.distance = distanceToBackground;
+        _layerHit = Layer.RaycastEndStop;
     }
 
     RaycastHit? RaycastForLayer(Layer layer)
