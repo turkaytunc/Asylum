@@ -18,12 +18,41 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        ChooseBehaviour();
+        Move();
+    }
+
+    private void ChooseBehaviour()
+    {
         if (Input.GetMouseButton(0))
         {
-            currentClickTarget = cameraRaycaster.Hit.point;
+            switch (cameraRaycaster.LayerHit)
+            {
+                case Layer.Walkable:
+                    currentClickTarget = cameraRaycaster.Hit.point;
+                    break;
+                case Layer.Enemy:
+                    Debug.Log("Attack");
+                    break;
+                default:
+                    Debug.Log("Unknown target");
+                    break;
+            }
         }
+    }
 
-        character.Move(currentClickTarget - transform.position, false, false);
+    private void Move()
+    {
+        Vector3 distanceToTarget = currentClickTarget - transform.position;
+
+        if (distanceToTarget.magnitude > 0.2f)
+        {
+            character.Move(distanceToTarget, false, false);
+        }
+        else
+        {
+            character.Move(Vector3.zero, false, false);
+        }
     }
 }
 
