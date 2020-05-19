@@ -30,7 +30,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            StartCoroutine(HandleClickIndicator());
             switch (cameraRaycaster.LayerHit) // todo remove log functions
             {
                 case Layer.Walkable:
@@ -43,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
                     Debug.Log("Unknown target");
                     break;
             }
+            StartCoroutine(HandleClickIndicator());
         }
     }
 
@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator HandleClickIndicator()
     {
         GameObject indicatorIcon = clickIndicator.transform.Find("ClickIndicatorIcon").gameObject;
-        clickIndicator.transform.position = currentClickTarget;
+        clickIndicator.transform.position = cameraRaycaster.Hit.point;
         yield return new WaitForSeconds(0.1f);
         indicatorIcon.SetActive(true);
         yield return new WaitForSeconds(1f);
