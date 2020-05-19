@@ -8,6 +8,10 @@ public class CameraRaycaster : MonoBehaviour
     private Layer _layerHit;
     private Camera viewCamera;
 
+    [SerializeField] private Layer[] layerPriorities = {
+        Layer.Enemy,
+        Layer.Walkable
+    };
 
     public RaycastHit Hit
     {
@@ -18,11 +22,6 @@ public class CameraRaycaster : MonoBehaviour
     {
         get { return _layerHit; }
     }
-
-    public Layer[] layerPriorities = {
-        Layer.Enemy,
-        Layer.Walkable
-    };
 
     private void Awake()
     {
@@ -61,11 +60,11 @@ public class CameraRaycaster : MonoBehaviour
         RaycastHit hitInfo; // used as an out parameter
 
         bool hasHit = Physics.Raycast(ray, out hitInfo, distanceToBackground, layerMask);
+        
         if (hasHit)
         {
             return hitInfo;
         }
         return null;
     }
-
 }

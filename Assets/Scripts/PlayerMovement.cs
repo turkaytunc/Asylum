@@ -18,11 +18,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        ChooseBehaviour();
+        ChooseClickBehaviour();
         Move();
     }
 
-    private void ChooseBehaviour()
+    private void ChooseClickBehaviour()
     {
         if (Input.GetMouseButton(0))
         {
