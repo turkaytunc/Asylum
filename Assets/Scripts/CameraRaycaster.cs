@@ -2,16 +2,21 @@
 
 public class CameraRaycaster : MonoBehaviour
 {
+
+    public OnLayerChangeObserver layerChangeObservers;
+
+    [SerializeField] private Layer[] layerPriorities = {
+        Layer.Enemy,
+        Layer.Walkable,
+        Layer.RaycastEndStop
+    };
     [SerializeField] float distanceToBackground = 100f;
 
     private RaycastHit _hit;
     private Layer _layerHit;
     private Camera viewCamera;
 
-    [SerializeField] private Layer[] layerPriorities = {
-        Layer.Enemy,
-        Layer.Walkable
-    };
+
 
     public RaycastHit Hit
     {
@@ -28,6 +33,7 @@ public class CameraRaycaster : MonoBehaviour
         viewCamera = Camera.main;
     }
 
+
     void Update()
     {
         RaycastForLayer();
@@ -42,15 +48,16 @@ public class CameraRaycaster : MonoBehaviour
             if (hitInfo.HasValue)
             {
                 _hit = hitInfo.Value;
-                _layerHit = layer;
+                if (_layerHit != layer)
+                {
+                    _layerHit = layer;
+                    layerChangeObservers();
+                }
                 return;
             }
-            else
-            {
-                _hit.distance = distanceToBackground;
-                _layerHit = Layer.RaycastEndStop;
-            }
         }
+        _hit.distance = distanceToBackground;
+        _layerHit = Layer.RaycastEndStop;
     }
 
     private RaycastHit? RaycastOnCursor(Layer layer)
@@ -67,4 +74,5 @@ public class CameraRaycaster : MonoBehaviour
         }
         return null;
     }
+
 }

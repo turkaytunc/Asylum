@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof (CameraRaycaster))]
 public class MouseCursor : MonoBehaviour
 {
     private CameraRaycaster cameraRaycaster;
+    [Header("Cursor Icons")]
     [SerializeField] private Texture2D walkCursorTexture;
     [SerializeField] private Texture2D attackCursorTexture;
     [SerializeField] private Texture2D unknownCursorTexture;
@@ -10,15 +12,20 @@ public class MouseCursor : MonoBehaviour
     private void Start()
     {
         cameraRaycaster = GetComponent<CameraRaycaster>();
+        cameraRaycaster.layerChangeObservers += SubscribeToLayerChangeObservers;
     }
 
-    private void LateUpdate()
+
+    private void SubscribeToLayerChangeObservers()
     {
         ChangeCursorTextureBasedOnLayer();
     }
 
+
+
     private void ChangeCursorTextureBasedOnLayer()
     {
+        Debug.Log("Layer Changed"); // todo remove log function
         switch (cameraRaycaster.LayerHit)
         {
             case Layer.Walkable:
