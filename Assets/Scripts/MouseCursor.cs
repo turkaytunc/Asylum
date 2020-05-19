@@ -15,13 +15,10 @@ public class MouseCursor : MonoBehaviour
         cameraRaycaster.layerChangeObservers += SubscribeToLayerChangeObservers;
     }
 
-
     private void SubscribeToLayerChangeObservers()
     {
         ChangeCursorTextureBasedOnLayer();
     }
-
-
 
     private void ChangeCursorTextureBasedOnLayer()
     {

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityStandardAssets.Characters.ThirdPerson;
 
@@ -7,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private ThirdPersonCharacter character;
     private CameraRaycaster cameraRaycaster;
     private Vector3 currentClickTarget;
+    private GameObject clickIndicator;
 
 
     private void Start()
@@ -14,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
         cameraRaycaster = Camera.main.transform.parent.GetComponent<CameraRaycaster>();
         character = GetComponent<ThirdPersonCharacter>();
         currentClickTarget = transform.position;
+        clickIndicator = GameObject.FindGameObjectWithTag("ClickIndicator");
+
     }
 
     private void FixedUpdate()
@@ -26,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
+            StartCoroutine(HandleClickIndicator());
             switch (cameraRaycaster.LayerHit) // todo remove log functions
             {
                 case Layer.Walkable:
@@ -53,6 +58,16 @@ public class PlayerMovement : MonoBehaviour
         {
             character.Move(Vector3.zero, false, false);
         }
+    }
+
+    private IEnumerator HandleClickIndicator()
+    {
+        GameObject indicatorIcon = clickIndicator.transform.Find("ClickIndicatorIcon").gameObject;
+        clickIndicator.transform.position = currentClickTarget;
+        yield return new WaitForSeconds(0.1f);
+        indicatorIcon.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        indicatorIcon.SetActive(false);
     }
 }
 
