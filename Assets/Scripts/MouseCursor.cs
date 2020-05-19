@@ -28,19 +28,20 @@ public class MouseCursor : MonoBehaviour
         switch (cameraRaycaster.LayerHit)
         {
             case Layer.Walkable:
-                Cursor.SetCursor(walkCursorTexture, new Vector2(0, 1), CursorMode.Auto);
+                SetCursorTexture(walkCursorTexture);
                 break;
             case Layer.Enemy:
-                Cursor.SetCursor(attackCursorTexture, new Vector2(0, 1), CursorMode.Auto);
+                SetCursorTexture(attackCursorTexture);
                 break;
             default:
-                Cursor.SetCursor(unknownCursorTexture, new Vector2(0, 1), CursorMode.Auto);
+                SetCursorTexture(unknownCursorTexture);
                 break;
         }
     }
 
-
-
-
+    private void SetCursorTexture(Texture2D texture)
+    {
+        Cursor.SetCursor(texture, new Vector2(0, 1), CursorMode.Auto);
+    }
 
 }
