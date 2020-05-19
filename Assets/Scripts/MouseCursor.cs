@@ -33,7 +33,7 @@ public class MouseCursor : MonoBehaviour
             case Layer.Enemy:
                 SetCursorTexture(attackCursorTexture);
                 break;
-            default:
+            case Layer.RaycastEndStop:
                 SetCursorTexture(unknownCursorTexture);
                 break;
         }

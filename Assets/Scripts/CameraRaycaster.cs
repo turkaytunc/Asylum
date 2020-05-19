@@ -41,10 +41,12 @@ public class CameraRaycaster : MonoBehaviour
                 _layerHit = layer;
                 return;
             }
-        }
-
-        _hit.distance = distanceToBackground;
-        _layerHit = Layer.RaycastEndStop;
+            else
+            {
+                _hit.distance = distanceToBackground;
+                _layerHit = Layer.RaycastEndStop;
+            }
+        }    
     }
 
     private RaycastHit? RaycastForLayer(Layer layer)

@@ -26,15 +26,15 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            switch (cameraRaycaster.LayerHit)
+            switch (cameraRaycaster.LayerHit) // todo remove log functions
             {
                 case Layer.Walkable:
                     currentClickTarget = cameraRaycaster.Hit.point;
                     break;
                 case Layer.Enemy:
-                    Debug.Log("Attack");
+                    Debug.Log("Attack"); 
                     break;
-                default:
+                case Layer.RaycastEndStop:
                     Debug.Log("Unknown target");
                     break;
             }
