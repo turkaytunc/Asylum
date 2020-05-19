@@ -174,8 +174,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0789250ebc4da984991fa4dcca876f85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerPriorities: 0900000008000000
   distanceToBackground: 100
+  layerPriorities: 0900000008000000
 --- !u!114 &394310704236392042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,3 +188,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8005e56bdf045d349993286a9114da1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkCursorTexture: {fileID: 2800000, guid: 3e835dd24f0f7234bae35dda7c182e1e, type: 3}
+  attackCursorTexture: {fileID: 2800000, guid: 7a2568232faf6cf4687864527d29c4a5, type: 3}
+  unknownCursorTexture: {fileID: 2800000, guid: 195e97b1a256e67428138f082f4c9b41, type: 3}
