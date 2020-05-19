@@ -31,9 +31,14 @@ public class CameraRaycaster : MonoBehaviour
 
     void Update()
     {
+        RaycastForLayer();
+    }
+
+    private void RaycastForLayer()
+    {
         foreach (Layer layer in layerPriorities)
         {
-            var hitInfo = RaycastForLayer(layer);
+            var hitInfo = RaycastOnCursor(layer);
 
             if (hitInfo.HasValue)
             {
@@ -46,10 +51,10 @@ public class CameraRaycaster : MonoBehaviour
                 _hit.distance = distanceToBackground;
                 _layerHit = Layer.RaycastEndStop;
             }
-        }    
+        }
     }
 
-    private RaycastHit? RaycastForLayer(Layer layer)
+    private RaycastHit? RaycastOnCursor(Layer layer)
     {
         Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
         int layerMask = 1 << (int)layer; // See Unity docs for mask formation
