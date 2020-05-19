@@ -12,7 +12,7 @@ public class MouseCursor : MonoBehaviour
         cameraRaycaster = GetComponent<CameraRaycaster>();
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         ChangeCursorTextureBasedOnLayer();
     }
