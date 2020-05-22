@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 using UnityStandardAssets.Characters.ThirdPerson;
 
@@ -9,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private CameraRaycaster cameraRaycaster;
     private Vector3 currentClickTarget;
     private GameObject clickIndicator;
+    [SerializeField] private float minDistanceToTarget = 0.2f;
 
     private void Start()
     {
@@ -48,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 distanceToTarget = currentClickTarget - transform.position;
 
-        if (distanceToTarget.magnitude > 0.2f)
+        if (distanceToTarget.magnitude > minDistanceToTarget)
         {
             character.Move(distanceToTarget, false, false);
         }
@@ -67,5 +69,15 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(1f);
         indicatorIcon.SetActive(false);
     }
+
+    private void OnDrawGizmos()
+    {
+        Handles.color = Color.black;
+        Handles.DrawLine(transform.position, currentClickTarget);
+        Handles.color = Color.blue;
+        Handles.DrawSolidDisc(transform.position, Vector3.up, minDistanceToTarget);
+    }
+
+    
 }
 
