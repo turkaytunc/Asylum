@@ -3,7 +3,7 @@
 public class CameraRaycaster : MonoBehaviour
 {
 
-    public OnLayerChangeObserver layerChangeObservers;
+    public event OnLayerChangeObserver layerChangeObservers;
 
     [SerializeField] private Layer[] layerPriorities = {
         Layer.Enemy,
@@ -15,7 +15,6 @@ public class CameraRaycaster : MonoBehaviour
     private RaycastHit _hit;
     private Layer _layerHit;
     private Camera viewCamera;
-
 
 
     public RaycastHit Hit
@@ -32,7 +31,6 @@ public class CameraRaycaster : MonoBehaviour
     {
         viewCamera = Camera.main;
     }
-
 
     void Update()
     {
@@ -63,16 +61,14 @@ public class CameraRaycaster : MonoBehaviour
     private RaycastHit? RaycastOnCursor(Layer layer)
     {
         Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
-        int layerMask = 1 << (int)layer; // See Unity docs for mask formation
-        RaycastHit hitInfo; // used as an out parameter
-
-        bool hasHit = Physics.Raycast(ray, out hitInfo, distanceToBackground, layerMask);
+        int layerMask = 1 << (int)layer;
         
+        RaycastHit hitInfo;
+        bool hasHit = Physics.Raycast(ray, out hitInfo, distanceToBackground, layerMask);   
         if (hasHit)
         {
             return hitInfo;
         }
         return null;
     }
-
 }

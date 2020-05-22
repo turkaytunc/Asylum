@@ -10,14 +10,12 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 currentClickTarget;
     private GameObject clickIndicator;
 
-
     private void Start()
     {
         cameraRaycaster = Camera.main.transform.parent.GetComponent<CameraRaycaster>();
         character = GetComponent<ThirdPersonCharacter>();
         currentClickTarget = transform.position;
         clickIndicator = GameObject.FindGameObjectWithTag("ClickIndicator");
-
     }
 
     private void FixedUpdate()
@@ -42,8 +40,7 @@ public class PlayerMovement : MonoBehaviour
                     Debug.Log("Unknown target");
                     break;
             }
-            StartCoroutine(HandleClickIndicator());
-            
+            StartCoroutine(HandleClickIndicator());           
         }
     }
 
