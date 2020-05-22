@@ -867,11 +867,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6597288999739764567, guid: 4464e78ff2851d94fa6ded89bd0e319a, type: 3}
       propertyPath: minDistanceToTarget
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6597288999739764567, guid: 4464e78ff2851d94fa6ded89bd0e319a, type: 3}
       propertyPath: minAttackDistanceToTarget
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8855265372170273080, guid: 4464e78ff2851d94fa6ded89bd0e319a, type: 3}
       propertyPath: m_Material
