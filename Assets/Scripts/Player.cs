@@ -5,8 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    private int currentHealthPoints;
-    private int maxHealthPoints;
+    private int currentHealthPoints = 100;
+    private int maxHealthPoints = 100;
 
     public float healthAsPercentage
     {
