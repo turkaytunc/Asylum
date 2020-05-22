@@ -2,4 +2,4 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public delegate void OnLayerChangeObserver();
+public delegate void OnLayerChangeObserver(Layer newLayer);

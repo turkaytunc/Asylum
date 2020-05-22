@@ -49,7 +49,7 @@ public class CameraRaycaster : MonoBehaviour
                 if (_layerHit != layer)
                 {
                     _layerHit = layer;
-                    layerChangeObservers();
+                    layerChangeObservers(layer);
                 }
                 return;
             }

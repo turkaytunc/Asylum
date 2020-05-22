@@ -15,15 +15,15 @@ public class MouseCursor : MonoBehaviour
         cameraRaycaster.layerChangeObservers += SubscribeToLayerChangeObservers;
     }
 
-    private void SubscribeToLayerChangeObservers()
+    private void SubscribeToLayerChangeObservers(Layer newLayer)
     {
-        ChangeCursorTextureBasedOnLayer();
+        ChangeCursorTextureBasedOnLayer(newLayer);
     }
 
-    private void ChangeCursorTextureBasedOnLayer()
+    private void ChangeCursorTextureBasedOnLayer(Layer newLayer)
     {
         Debug.Log("Layer Changed"); // todo remove log function
-        switch (cameraRaycaster.LayerHit)
+        switch (newLayer)
         {
             case Layer.Walkable:
                 SetCursorTexture(walkCursorTexture);
