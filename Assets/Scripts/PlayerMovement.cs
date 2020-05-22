@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private CameraRaycaster cameraRaycaster;
     private Vector3 currentClickTarget;
     private GameObject clickIndicator;
-    [SerializeField] private float minDistanceToTarget = 0.2f;
+    [SerializeField] private float minDistanceToTarget = 2f;
 
     private void Start()
     {
@@ -74,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Handles.color = Color.black;
         Handles.DrawLine(transform.position, currentClickTarget);
-        Handles.color = Color.blue;
+        Handles.color = new Color(0, 200, 200, 0.05f);
         Handles.DrawSolidDisc(transform.position, Vector3.up, minDistanceToTarget);
     }
 
