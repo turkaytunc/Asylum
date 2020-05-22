@@ -33,9 +33,6 @@ public class PlayerMovement : MonoBehaviour
         ChooseClickBehaviour();
         MoveToDestination();
         HandleClickIndicator();
-
-
-
     }
 
     private void ChooseClickBehaviour()
