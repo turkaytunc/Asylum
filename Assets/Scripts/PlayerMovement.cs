@@ -10,7 +10,9 @@ public class PlayerMovement : MonoBehaviour
     private CameraRaycaster cameraRaycaster;
     private Vector3 currentClickTarget;
     private GameObject clickIndicator;
+    private Vector3 distanceToTarget;
     [SerializeField] private float minDistanceToTarget = 2f;
+    [SerializeField] private float minAttackDistanceToTarget = 2f;
 
     private void Start()
     {
@@ -23,19 +25,23 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         ChooseClickBehaviour();
-        Move();
+        MoveToDestination();
+
+
     }
 
     private void ChooseClickBehaviour()
     {
         if (Input.GetMouseButton(0))
         {
+            currentClickTarget = cameraRaycaster.Hit.point;
             switch (cameraRaycaster.LayerHit) // todo remove log functions
             {
                 case Layer.Walkable:
-                    currentClickTarget = cameraRaycaster.Hit.point;
+                    distanceToTarget = CalculateDistanceBetweenPlayerAndTarget(currentClickTarget, minDistanceToTarget);
                     break;
                 case Layer.Enemy:
+                    distanceToTarget = CalculateDistanceBetweenPlayerAndTarget(currentClickTarget, minAttackDistanceToTarget);
                     Debug.Log("Attack"); 
                     break;
                 case Layer.RaycastEndStop:
@@ -44,15 +50,15 @@ public class PlayerMovement : MonoBehaviour
             }
             StartCoroutine(HandleClickIndicator());           
         }
+
     }
 
-    private void Move()
+    private void MoveToDestination()
     {
-        Vector3 distanceToTarget = currentClickTarget - transform.position;
-
-        if (distanceToTarget.magnitude > minDistanceToTarget)
+        Vector3 dist = distanceToTarget - transform.position;
+        if (dist.magnitude > 0)
         {
-            character.Move(distanceToTarget, false, false);
+            character.Move(dist, false, false);
         }
         else
         {
@@ -70,12 +76,23 @@ public class PlayerMovement : MonoBehaviour
         indicatorIcon.SetActive(false);
     }
 
+
+    private Vector3 CalculateDistanceBetweenPlayerAndTarget(Vector3 destination, float minDistanceToTarget)
+    {
+        Vector3 distanceToTargetVector = (destination - transform.position).normalized * minDistanceToTarget;
+
+        return destination - distanceToTargetVector;
+    }
     private void OnDrawGizmos()
     {
         Handles.color = Color.black;
         Handles.DrawLine(transform.position, currentClickTarget);
+
         Handles.color = new Color(0, 200, 200, 0.05f);
         Handles.DrawSolidDisc(transform.position, Vector3.up, minDistanceToTarget);
+
+        Handles.color = new Color(200, 0, 200, 0.05f);
+        Handles.DrawSolidDisc(transform.position + Vector3.up * 0.2f, Vector3.up, minAttackDistanceToTarget);
     }
 
     
