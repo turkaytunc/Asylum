@@ -1536,6 +1536,7 @@ GameObject:
   - component: {fileID: 8855265372170273080}
   - component: {fileID: 8855265372176515706}
   - component: {fileID: 6597288999739764567}
+  - component: {fileID: 780094479}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1639,6 +1640,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e3144e4b648833243af440a19a66dc1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minAttackDistanceToTarget: 3
+  minDistanceToTarget: 1
+--- !u!114 &780094479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8855265372183152952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 087f24580aaf16c448d33e49d124447c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8855265372183153346
